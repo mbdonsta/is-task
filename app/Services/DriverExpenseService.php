@@ -4,7 +4,7 @@ namespace App\Services;
   
 class DriverExpenseService
 {
-    public function calculateDriverExpenses(array $drivers, array $expenses)
+    public function calculateDriverExpenses(array $drivers, array $expenses): array
     {
         $resultTitles = $this->getResultTitles($drivers);
         $expensesRows = $this->getExpensesRows($drivers, $expenses);
@@ -58,7 +58,7 @@ class DriverExpenseService
     {
         $totals = ['Total', 'amount' => 0];
 
-        foreach ($drivers as $driver) {    
+        foreach ($drivers as $driver) {
             $totals[$driver] = array_reduce($expensesRows, function($carry, $item) use ($driver) {
                 return $carry += $item[$driver];
             });

@@ -15,17 +15,6 @@ class HomeController extends Controller
         $drivers = ['John Sigono', 'Tom Davidson'];
 
         $expenses = $this->generateTestExpenses();
-        // $expenses = [
-        //     'Fuel (EFS)' => '100',
-        //     'Fuel (Comdata)' => '50',
-        //     // 'Insurance (Truck)' => '150.67',
-        //     // 'Insurance (Trailer)' => '283.86',
-        //     // 'Engine oil' => '122.15',
-        //     // 'Tires' => '491.9',
-        //     // 'Truck wash' => '319.82',
-        //     // 'Trailer wash' => '8.98',
-        //     // 'Flight tickets' => '473.2'
-        // ];
 
         return view('home', [
             'data' => $driverExpenseService->calculateDriverExpenses($drivers, $expenses),
