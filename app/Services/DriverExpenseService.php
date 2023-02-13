@@ -1,7 +1,9 @@
 <?php
- 
+
 namespace App\Services;
-  
+
+use Illuminate\Support\Collection;
+
 class DriverExpenseService
 {
     public function calculateDriverExpenses(array $drivers, array $expenses): array
@@ -57,13 +59,12 @@ class DriverExpenseService
     private function getTotals(array $expensesRows, array $drivers): array
     {
         $totals = ['Total', 'amount' => 0];
+        $expensesRows = collect($expensesRows);
 
         foreach ($drivers as $driver) {
-            $totals[$driver] = array_reduce($expensesRows, function($carry, $item) use ($driver) {
-                return $carry += $item[$driver];
-            });
+            $totals[$driver] = $expensesRows->sum($driver);
             $totals['amount'] += $totals[$driver];
-        }  
+        }
 
         return $totals;
     }
